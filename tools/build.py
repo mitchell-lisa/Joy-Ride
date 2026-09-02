@@ -9,7 +9,16 @@ header, footer, meta tags and JSON-LD stay identical across pages.
 
 Edit content here (or in tools/content/), re-run, commit the generated HTML.
 """
-import os, html, datetime
+import os, html, datetime, hashlib
+
+def asset(path):
+    """Append a content hash so browsers and CDNs never serve a stale copy after a deploy."""
+    full = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), path.lstrip("/"))
+    try:
+        h = hashlib.md5(open(full, "rb").read()).hexdigest()[:10]
+    except OSError:
+        return path
+    return f"{path}?v={h}"
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SITE_URL = "https://www.joyridedelray.com"
@@ -216,13 +225,13 @@ def layout(*, title, description, path, body, over_hero=False, noindex=False, ex
 <meta property="og:image" content="{SITE_URL}/assets/img/og-image.jpg">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="theme-color" content="#004aad">
-<link rel="icon" href="/assets/logo/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="{asset("/assets/logo/favicon.svg")}" type="image/svg+xml">
 <link rel="apple-touch-icon" href="/assets/logo/apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="preload" href="/assets/fonts/Italiana-Regular.ttf" as="font" type="font/ttf" crossorigin>
+<link rel="preload" href="{asset("/assets/fonts/Italiana-Regular.ttf")}" as="font" type="font/ttf" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/assets/css/style.css">
+<link rel="stylesheet" href="{asset("/assets/css/style.css")}">
 <script>document.documentElement.classList.add("js")</script>
 {extra_head}
 <script type="application/ld+json">{json.dumps(jsonld, indent=0)}</script>
@@ -233,8 +242,8 @@ def layout(*, title, description, path, body, over_hero=False, noindex=False, ex
 <header class="{header_cls}">
   <div class="container header__inner">
     <a class="brand" href="/" aria-label="Joy Ride home">
-      <img class="brand__dark" src="/assets/logo/joyride-wordmark.svg" alt="Joy Ride" width="129" height="30">
-      <img class="brand__light" src="/assets/logo/joyride-wordmark-white.svg" alt="Joy Ride" width="129" height="30">
+      <img class="brand__dark" src="{asset("/assets/logo/joyride-wordmark.svg")}" alt="Joy Ride" width="129" height="30">
+      <img class="brand__light" src="{asset("/assets/logo/joyride-wordmark-white.svg")}" alt="Joy Ride" width="129" height="30">
     </a>
     {locswitch(location, inplace)}
     <button class="burger" aria-label="Menu" aria-expanded="false"><span></span><span></span><span></span></button>
@@ -298,7 +307,7 @@ def layout(*, title, description, path, body, over_hero=False, noindex=False, ex
   <button class="modal__close" aria-label="Close video">×</button>
   <div class="modal__box"><iframe title="Joy Ride Golf Cart Rentals video" src="" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe></div>
 </div>
-<script src="/assets/js/main.js" defer></script>
+<script src="{asset("/assets/js/main.js")}" defer></script>
 </body>
 </html>
 """
@@ -488,10 +497,10 @@ def page_home():
     body = f"""
 <section class="hero">
   <div class="hero__media">
-    <video autoplay muted loop playsinline preload="metadata" poster="/assets/video/hero-poster.jpg" data-gif="/assets/video/hero.gif" aria-label="Joy Ride golf carts and Mokes cruising the beach">
-      <source src="/assets/video/hero.webm" type="video/webm">
-      <source src="/assets/video/hero.mp4" type="video/mp4">
-      <img src="/assets/video/hero.gif" alt="Joy Ride golf carts and Mokes cruising the beach">
+    <video autoplay muted loop playsinline preload="metadata" poster="{asset("/assets/video/hero-poster.jpg")}" data-gif="{asset("/assets/video/hero.gif")}" aria-label="Joy Ride golf carts and Mokes cruising the beach">
+      <source src="{asset("/assets/video/hero.webm")}" type="video/webm">
+      <source src="{asset("/assets/video/hero.mp4")}" type="video/mp4">
+      <img src="{asset("/assets/video/hero.gif")}" alt="Joy Ride golf carts and Mokes cruising the beach">
     </video>
   </div>
   <div class="container hero__content">
