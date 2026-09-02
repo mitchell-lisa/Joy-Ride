@@ -37,35 +37,96 @@ BIZ = {
     "affiliate": "https://joy-ride-1689.jaka.app",
 }
 
-LOCATIONS = [
-    {"city": "Delray Beach", "state": "FL", "hq": True,
-     "blurb": "Our home base on Atlantic Avenue. Free delivery across Delray Beach, Boca Raton, Boynton Beach, Highland Beach and Gulf Stream.",
-     "phone": BIZ["phone_display"], "tel": BIZ["phone_tel"], "site": None},
-    {"city": "Palm Beach", "state": "FL",
-     "blurb": "Island cruising from Worth Avenue to the Lake Trail, delivered to your door.",
-     "phone": "(561) 562-7152", "tel": "+15615627152", "site": "https://www.joyridepalmbeach.com"},
-    {"city": "Ft Lauderdale & Pompano Beach", "state": "FL",
-     "blurb": "Beach-to-boardwalk rides along the A1A corridor in Broward County.",
-     "phone": BIZ["phone_display"], "tel": BIZ["phone_tel"], "site": "https://joyridepompanobeach.com"},
-    {"city": "Vero Beach", "state": "FL",
-     "blurb": "Ocean Drive, the beachside village and quiet Treasure Coast streets.",
-     "phone": BIZ["phone_display"], "tel": BIZ["phone_tel"], "site": None},
-    {"city": "Jacksonville", "state": "FL",
-     "blurb": "Jacksonville Beach, Ponte Vedra and St. Augustine with same-day delivery.",
-     "phone": "(904) 834-9466", "tel": "+19048349466", "site": "https://joyridejacksonville.com"},
-    {"city": "Dewey & Rehoboth Beach", "state": "DE",
-     "blurb": "Summer on the Delaware shore, from the boardwalk to the bay.",
-     "phone": BIZ["phone_display"], "tel": BIZ["phone_tel"], "site": None},
-    {"city": "Charleston", "state": "SC",
-     "blurb": "Folly Beach, Sullivan's Island and the Isle of Palms in Lowcountry style.",
-     "phone": "(843) 905-2495", "tel": "+18439052495", "site": "https://joyridecharleston.com"},
-    {"city": "Montauk", "state": "NY",
-     "blurb": "The End of Long Island, from Ditch Plains to the harbor.",
-     "phone": "(631) 430-6653", "tel": "+16314306653", "site": "https://joyridemontauk.com"},
-]
+STD_CART = [250, 190, 180, 170, 160, 150, 140]
+STD_MOKE = [300, 200, 190, 170, 160, 150, 140]
+TIER_LABELS = ["1 day", "2 days", "3 days", "4–5 days", "6 days", "7 days", "8+ days"]
+DELRAY_STORE = "https://www.joyridedelray.com"
 
-CART_RATES = [("1 day", 250), ("2 days", 190), ("3 days", 180), ("4–5 days", 170), ("6 days", 160), ("7 days", 150), ("8+ days", 140)]
-MOKE_RATES = [("1 day", 300), ("2 days", 200), ("3 days", 190), ("4–5 days", 170), ("6 days", 160), ("7 days", 150), ("8+ days", 140)]
+# One entry per location. Each town that runs its own Shopify store books there;
+# Vero Beach and Dewey/Rehoboth book through the Delray store.
+# rates: list of 7 per-day prices matching TIER_LABELS, or a single-item list
+# when only the one-day price is published (the table then says "call").
+LOCATIONS = [
+    {"slug": "delray-beach", "city": "Delray Beach", "short": "Delray", "state": "FL", "hq": True,
+     "blurb": "Our home base on Atlantic Avenue, and the biggest fleet.",
+     "areas": ["Delray Beach", "Boca Raton", "Boynton Beach", "Highland Beach", "Gulf Stream"],
+     "phone": "(561) 569-2438", "tel": "+15615692438", "store": DELRAY_STORE, "site": None,
+     "map": "Delray Beach, FL",
+     "cart": {"url": DELRAY_STORE + "/products/one-day-golf-cart-rental", "rates": STD_CART},
+     "moke": {"url": DELRAY_STORE + "/products/electric-mini-moke", "rates": STD_MOKE},
+     "hourly": {"url": DELRAY_STORE + "/products/marriott-golf-cart-rental", "rates": [("2 hours", 125), ("4 hours", 150), ("6 hours", 200), ("8 hours", 250), ("10 hours", 300)]},
+     "addons": [("Car seat add-on", 15, DELRAY_STORE + "/products/car-seat-add-on"), ("Damage waiver", 12, DELRAY_STORE + "/products/golf-cart-rental-liability-insurance")],
+     "notes": []},
+    {"slug": "palm-beach", "city": "Palm Beach", "short": "Palm Beach", "state": "FL",
+     "blurb": "Island cruising from Worth Avenue to the Lake Trail.",
+     "areas": ["Palm Beach", "West Palm Beach"],
+     "phone": "(561) 562-7152", "tel": "+15615627152", "store": "https://www.joyridepalmbeach.com", "site": "https://www.joyridepalmbeach.com",
+     "map": "Palm Beach, FL",
+     "cart": {"url": "https://www.joyridepalmbeach.com/products/copy-of-golf-cart-rental-palm-beach", "rates": STD_CART,
+              "extras": "Touchscreen with Apple CarPlay, Bluetooth speakers, lithium batteries, LED lights"},
+     "moke": {"url": "https://www.joyridepalmbeach.com/products/moke-rental", "rates": [300]},
+     "hourly": None, "addons": [("Damage waiver", 12, "https://www.joyridepalmbeach.com/products/golf-cart-rental-damage-waiver")],
+     "notes": ["Ask about special event and university partnership pricing."]},
+    {"slug": "pompano-beach", "city": "Pompano & Ft Lauderdale", "short": "Pompano", "state": "FL",
+     "blurb": "Beach-to-boardwalk rides along the A1A corridor in Broward County.",
+     "areas": ["Pompano Beach", "Fort Lauderdale", "Lauderdale-by-the-Sea", "Deerfield Beach"],
+     "phone": "(561) 569-2438", "tel": "+15615692438", "store": "https://joyridepompanobeach.com", "site": "https://joyridepompanobeach.com",
+     "map": "Pompano Beach, FL",
+     "cart": {"url": "https://joyridepompanobeach.com/products/luxury-6-passenger-golf-cart-rental", "rates": STD_CART,
+              "extras": "Speakers with touchscreen display"},
+     "moke": {"url": "https://joyridepompanobeach.com/products/electric-mini-moke", "rates": [250]},
+     "hourly": None, "addons": [("Damage waiver", 12, "https://joyridepompanobeach.com/products/golf-cart-rental-damage-waiver")],
+     "notes": ["Free delivery within our Broward delivery range. Outside it, call for a quote."]},
+    {"slug": "vero-beach", "city": "Vero Beach", "short": "Vero", "state": "FL",
+     "blurb": "Ocean Drive, the beachside village and quiet Treasure Coast streets.",
+     "areas": ["Vero Beach", "Indian River Shores"],
+     "phone": "(561) 569-2438", "tel": "+15615692438", "store": DELRAY_STORE, "site": None,
+     "map": "Vero Beach, FL",
+     "cart": {"url": DELRAY_STORE + "/products/one-day-golf-cart-rental", "rates": STD_CART},
+     "moke": {"url": DELRAY_STORE + "/products/electric-mini-moke", "rates": STD_MOKE},
+     "hourly": None, "addons": [("Damage waiver", 12, DELRAY_STORE + "/products/golf-cart-rental-liability-insurance")],
+     "notes": ["Vero Beach rentals are booked through our Delray Beach store. Enter your Vero Beach delivery address at checkout, or call and we will set it up."]},
+    {"slug": "jacksonville", "city": "Jacksonville & St. Augustine", "short": "Jacksonville", "state": "FL",
+     "blurb": "Jax Beach, Ponte Vedra and St. Augustine with same-day delivery.",
+     "areas": ["Jacksonville Beach", "Neptune Beach", "Atlantic Beach", "Ponte Vedra", "St. Augustine"],
+     "phone": "(904) 834-9466", "tel": "+19048349466", "store": "https://joyridejacksonville.com", "site": "https://joyridejacksonville.com",
+     "map": "Jacksonville Beach, FL",
+     "cart": {"url": "https://joyridejacksonville.com/products/golf-cart-rental-jacksonville", "rates": [299, 190, 180, 170, 160, 150, 140], "range": "15 to 25 miles"},
+     "moke": {"url": "https://joyridejacksonville.com/products/electric-moke-rental", "rates": [350, 225, 215, 200, 180, 160, 150]},
+     "hourly": None,
+     "weekly": {"label": "St. Augustine weekly golf cart", "price": 1680, "url": "https://joyridejacksonville.com/products/golf-cart-rental-st-augustine"},
+     "addons": [("Damage waiver", 12, "https://joyridejacksonville.com/products/golf-cart-rental-damage-waiver")],
+     "notes": ["Three-day minimum on holiday weekends.", "Same-day delivery available across the Jax Beach area."]},
+    {"slug": "rehoboth-beach", "city": "Dewey & Rehoboth Beach", "short": "Rehoboth", "state": "DE",
+     "blurb": "Summer on the Delaware shore, from the boardwalk to the bay.",
+     "areas": ["Rehoboth Beach", "Dewey Beach"],
+     "phone": "(561) 569-2438", "tel": "+15615692438", "store": DELRAY_STORE, "site": None,
+     "map": "Rehoboth Beach, DE",
+     "cart": {"url": DELRAY_STORE + "/products/one-day-golf-cart-rental", "rates": STD_CART},
+     "moke": {"url": DELRAY_STORE + "/products/electric-mini-moke", "rates": STD_MOKE},
+     "hourly": None, "addons": [("Damage waiver", 12, DELRAY_STORE + "/products/golf-cart-rental-liability-insurance")],
+     "notes": ["Delaware rentals are booked through our Delray Beach store. Enter your Dewey or Rehoboth delivery address at checkout, or call and we will set it up."]},
+    {"slug": "charleston", "city": "Charleston", "short": "Charleston", "state": "SC",
+     "blurb": "Downtown Charleston and the Isle of Palms in Lowcountry style.",
+     "areas": ["Downtown Charleston", "Isle of Palms"],
+     "phone": "(843) 905-2495", "tel": "+18439052495", "store": "https://joyridecharleston.com", "site": "https://joyridecharleston.com",
+     "map": "Charleston, SC",
+     "cart": {"url": "https://joyridecharleston.com/products/one-day-golf-cart-rental", "rates": STD_CART},
+     "moke": None, "hourly": None,
+     "addons": [("Damage waiver", 12, "https://joyridecharleston.com/products/golf-cart-rental-damage-waiver"), ("Isle of Palms delivery", 250, "https://joyridecharleston.com/products/delivery-isle-of-palms")],
+     "notes": ["Free delivery in downtown Charleston. Isle of Palms delivery is $250 round trip."]},
+    {"slug": "montauk", "city": "Montauk", "short": "Montauk", "state": "NY",
+     "blurb": "The End of Long Island, from Ditch Plains to the harbor.",
+     "areas": ["Montauk"],
+     "phone": "(631) 430-6653", "tel": "+16314306653", "store": "https://joyridemontauk.com", "site": "https://joyridemontauk.com",
+     "map": "Montauk, NY",
+     "cart": {"url": "https://joyridemontauk.com/products/one-day-golf-cart-rental", "rates": STD_CART},
+     "moke": {"url": "https://joyridemontauk.com/products/electric-mini-moke", "rates": STD_MOKE},
+     "hourly": None, "addons": [("Damage waiver", 12, "https://joyridemontauk.com/products/golf-cart-rental-damage-waiver")],
+     "notes": []},
+]
+LOC = {l["slug"]: l for l in LOCATIONS}
+
 
 REVIEWS = [
     ("Christos L.", "Sep 2025", "The process was quick, smooth, and hassle-free from start to finish. The staff was professional, friendly, and very accommodating."),
@@ -75,7 +136,7 @@ REVIEWS = [
     ("Ye S.", "Sep 2023", "I got a brand-new one with a backup camera, touchscreen and really good range. They were so friendly and this was such a fun experience."),
 ]
 
-NAV = [("Rent", "/rentals"), ("Locations", "/locations"), ("Events", "/events"), ("Sales", "/sales"), ("Map", "/golf-cart-map"), ("Contact", "/contact")]
+NAV = [("Rent", "/rentals"), ("Locations", "/locations"), ("Events", "/events"), ("Sales", "/sales"), ("Contact", "/contact")]
 
 # ----------------------------------------------------------------------------
 # Small SVG icons (inline, currentColor)
@@ -90,6 +151,8 @@ ICON_PIN = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidd
 ICON_CLOCK = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>'
 ICON_TRUCK = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true"><path d="M2 7h11v9H2zM13 10h4l3 3v3h-7z"/><circle cx="6" cy="17.5" r="1.8"/><circle cx="17" cy="17.5" r="1.8"/></svg>'
 ICON_SHIELD = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true"><path d="M12 2.5 4 5.5v6c0 5 3.5 8.5 8 10 4.5-1.5 8-5 8-10v-6z"/><path d="m8.5 12 2.5 2.5 4.5-5"/></svg>'
+ICON_INFO = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 11v6M12 7.5v.5"/></svg>'
+ICON_CHEV = '<svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>'
 ICON_CARD = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true"><rect x="2.5" y="5" width="19" height="14" rx="1.5"/><path d="M2.5 9.5h19M6 15h4"/></svg>'
 
 def stars(n=5):
@@ -98,7 +161,20 @@ def stars(n=5):
 # ----------------------------------------------------------------------------
 # Layout
 # ----------------------------------------------------------------------------
-def layout(*, title, description, path, body, over_hero=False, noindex=False, extra_head=""):
+def locswitch(current=None, inplace=False):
+    cur = LOC.get(current) if current else None
+    label = cur["short"] if cur else "Choose location"
+    items = ""
+    for l in LOCATIONS:
+        cur_attr = ' aria-current="true"' if cur and cur["slug"] == l["slug"] else ""
+        inplace_attr = " data-inplace" if inplace else ""
+        items += ('<a href="/%s" data-loc="%s" data-name="%s"%s%s><span>%s</span><small>%s</small></a>'
+                  % (l["slug"], l["slug"], html.escape(l["short"]), inplace_attr, cur_attr, html.escape(l["city"]), l["state"]))
+    return (f'<div class="locswitch" data-current="{current or ""}">'
+            f'<button class="locswitch__btn" aria-haspopup="true" aria-expanded="false">{ICON_PIN}<span data-loc-label>{html.escape(label)}</span>{ICON_CHEV}</button>'
+            f'<div class="locswitch__menu">{items}<a class="locswitch__all" href="/locations">All locations {ICON_ARROW}</a></div></div>')
+
+def layout(*, title, description, path, body, over_hero=False, noindex=False, extra_head="", location=None, inplace=False):
     canonical = SITE_URL + ("" if path == "/" else path)
     nav_links = ""
     for label, href in NAV:
@@ -106,6 +182,7 @@ def layout(*, title, description, path, body, over_hero=False, noindex=False, ex
         nav_links += '<a class="nav__link" href="%s"%s>%s</a>' % (href, current, label)
     header_cls = "header header--over" if over_hero else "header"
     year = datetime.date.today().year
+    location_links = "".join(f'          <li><a href="/{l["slug"]}">{html.escape(l["city"])}</a></li>\n' for l in LOCATIONS)
     jsonld = {
         "@context": "https://schema.org",
         "@type": "LocalBusiness",
@@ -152,13 +229,14 @@ def layout(*, title, description, path, body, over_hero=False, noindex=False, ex
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
-<div class="topbar"><span>Call or text to reserve: <a href="tel:{BIZ['phone_tel']}">{BIZ['phone_display']}</a></span><span class="topbar__extra">&nbsp;·&nbsp; Free door-to-door delivery</span></div>
+<div class="topbar"><span>Call or text to reserve: <a href="tel:{(LOC[location]['tel'] if location else BIZ['phone_tel'])}">{(LOC[location]['phone'] if location else BIZ['phone_display'])}</a></span><span class="topbar__extra">&nbsp;·&nbsp; Free door-to-door delivery</span></div>
 <header class="{header_cls}">
   <div class="container header__inner">
     <a class="brand" href="/" aria-label="Joy Ride home">
-      <img class="brand__dark" src="/assets/logo/joyride-lockup.svg" alt="Joy Ride" width="192" height="46">
-      <img class="brand__light" src="/assets/logo/joyride-lockup-white.svg" alt="Joy Ride" width="192" height="46">
+      <img class="brand__dark" src="/assets/logo/joyride-wordmark.svg" alt="Joy Ride" width="129" height="30">
+      <img class="brand__light" src="/assets/logo/joyride-wordmark-white.svg" alt="Joy Ride" width="129" height="30">
     </a>
+    {locswitch(location, inplace)}
     <button class="burger" aria-label="Menu" aria-expanded="false"><span></span><span></span><span></span></button>
     <nav class="nav" aria-label="Primary">
       {nav_links}
@@ -172,9 +250,9 @@ def layout(*, title, description, path, body, over_hero=False, noindex=False, ex
 </main>
 <footer class="footer">
   <div class="container">
-    <div class="footer__grid">
+    <div class="footer__grid footer__grid--5">
       <div class="footer__brand">
-        <img src="/assets/logo/joyride-lockup-white.svg" alt="Joy Ride" width="233" height="56">
+        <img src="/assets/logo/joyride-wordmark-white.svg" alt="Joy Ride" width="146" height="34">
         <p>Street-legal golf cart and electric Moke rentals, delivered free to your door. Live like a local and take a Joy Ride.</p>
       </div>
       <div>
@@ -186,6 +264,12 @@ def layout(*, title, description, path, body, over_hero=False, noindex=False, ex
           <li><a href="/sales">Golf Cart Sales</a></li>
           <li><a href="/golf-cart-map">Delray Beach Golf Cart Map</a></li>
           <li><a href="/affiliate">Become an Affiliate</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Locations</h4>
+        <ul>
+{location_links}
         </ul>
       </div>
       <div>
@@ -206,7 +290,7 @@ def layout(*, title, description, path, body, over_hero=False, noindex=False, ex
     </div>
     <div class="footer__bottom">
       <span>© <span data-year>{year}</span> Joy Ride · MB Meadows LLC</span>
-      <span>Delray Beach · Palm Beach · Pompano · Vero · Jacksonville · Rehoboth · Charleston · Montauk</span>
+      <span>Golf cart &amp; Moke rentals in eight beach towns</span>
     </div>
   </div>
 </footer>
@@ -222,31 +306,91 @@ def layout(*, title, description, path, body, over_hero=False, noindex=False, ex
 # ----------------------------------------------------------------------------
 # Reusable blocks
 # ----------------------------------------------------------------------------
-def rate_table(rows):
-    best = rows[-1][0]
+def rate_table(prices, per="/ day"):
     out = ['<table class="rate-table">']
-    for label, price in rows:
-        cls = ' class="is-best"' if label == best else ""
-        out.append(f"<tr{cls}><td>{label}</td><td>${price}<small>/ day</small></td></tr>")
+    if len(prices) == 1:
+        out.append(f"<tr><td>1 day</td><td>${prices[0]}<small>{per}</small></td></tr>")
+        out.append('<tr><td>Multi-day</td><td style="font-family:var(--body);font-size:0.85rem;color:var(--muted)">Call for rates</td></tr>')
+    else:
+        for i, (label, price) in enumerate(zip(TIER_LABELS, prices)):
+            cls = ' class="is-best"' if i == len(prices) - 1 else ""
+            out.append(f"<tr{cls}><td>{label}</td><td>${price}<small>{per}</small></td></tr>")
     out.append("</table>")
     return "\n".join(out)
 
-def rates_block():
-    return f"""
-<div class="rates">
-  <div class="rate-card reveal" data-delay="1">
+def note(text):
+    return f'<div class="note">{ICON_INFO}<span>{html.escape(text)}</span></div>'
+
+def location_panel(l, active=False):
+    cards = []
+    cards.append(f"""<div class="rate-card">
     <h3>Golf Cart <span>6 seats · street legal</span></h3>
-    {rate_table(CART_RATES)}
-    <p class="rate-note">Multi-day rates are per day. A refundable $250 security deposit is collected at delivery.</p>
-    <a class="btn btn--primary mt-2" href="{BIZ['book_cart']}" target="_blank" rel="noopener">Reserve a golf cart {ICON_ARROW}</a>
-  </div>
-  <div class="rate-card reveal" data-delay="2">
+    {rate_table(l['cart']['rates'])}
+    <p class="rate-note">Per-day rates. Refundable $250 security deposit at delivery.{' ' + html.escape(l['cart']['extras']) + '.' if l['cart'].get('extras') else ''}</p>
+    <a class="btn btn--primary rate-cta" href="{l['cart']['url']}" target="_blank" rel="noopener">Reserve a golf cart {ICON_ARROW}</a>
+  </div>""")
+    if l.get("moke"):
+        cards.append(f"""<div class="rate-card">
     <h3>Electric Moke <span>4 seats · open top</span></h3>
-    {rate_table(MOKE_RATES)}
-    <p class="rate-note">Multi-day rates are per day. A refundable $250 security deposit is collected at delivery.</p>
-    <a class="btn btn--red mt-2" href="{BIZ['book_moke']}" target="_blank" rel="noopener">Reserve a Moke {ICON_ARROW}</a>
+    {rate_table(l['moke']['rates'])}
+    <p class="rate-note">Per-day rates. Refundable $250 security deposit at delivery.</p>
+    <a class="btn btn--red rate-cta" href="{l['moke']['url']}" target="_blank" rel="noopener">Reserve a Moke {ICON_ARROW}</a>
+  </div>""")
+    else:
+        cards.append(f"""<div class="rate-card rate-card--muted unavailable">
+    <h3>Electric Moke <span>not in this fleet</span></h3>
+    <p class="rate-note">Mokes are not currently available in {html.escape(l['city'])}. Our six-seat golf carts are ready to go, or check our Florida and Montauk locations for a Moke.</p>
+  </div>""")
+    if l.get("hourly"):
+        rows = "".join(f"<tr><td>{lbl}</td><td>${p}</td></tr>" for lbl, p in l["hourly"]["rates"])
+        cards.append(f"""<div class="rate-card">
+    <h3>Hourly Golf Cart <span>same-day fun</span></h3>
+    <table class="rate-table">{rows}</table>
+    <p class="rate-note">Perfect for an afternoon on the Avenue.</p>
+    <a class="btn btn--ghost rate-cta" href="{l['hourly']['url']}" target="_blank" rel="noopener">Book by the hour {ICON_ARROW}</a>
+  </div>""")
+    if l.get("weekly"):
+        w = l["weekly"]
+        cards.append(f"""<div class="rate-card">
+    <h3>{html.escape(w['label'])} <span>7 days</span></h3>
+    <table class="rate-table"><tr class="is-best"><td>Weekly</td><td>${w['price']:,}<small>/ week</small></td></tr></table>
+    <p class="rate-note">Six-seat cart delivered to St. Augustine for the week.</p>
+    <a class="btn btn--ghost rate-cta" href="{w['url']}" target="_blank" rel="noopener">Reserve weekly {ICON_ARROW}</a>
+  </div>""")
+    three = " rates--three" if len(cards) > 2 else ""
+    addons = ", ".join(f'<a href="{u}" target="_blank" rel="noopener">{html.escape(n)} ${p}</a>' for n, p, u in l.get("addons", []))
+    notes = "".join(note(n) for n in l.get("notes", []))
+    areas = "".join(f"<span>{html.escape(a)}</span>" for a in l["areas"])
+    return f"""<div class="locpanel{' is-active' if active else ''}" data-loc="{l['slug']}" data-name="{html.escape(l['short'])}">
+  <div class="locpanel__head">
+    <div><h3>{html.escape(l['city'])}, {l['state']}</h3><p>{html.escape(l['blurb'])} Free delivery to: </p><div class="area-tags">{areas}</div></div>
+    <a class="locpanel__phone" href="tel:{l['tel']}">{l['phone']}</a>
   </div>
+  <div class="rates{three}">{"".join(cards)}</div>
+  <div class="notes">{notes}{note("Optional add-ons: " + ", ".join(f"{n} ${p}" for n, p, u in l.get("addons", [])) + ".") if l.get("addons") else ""}</div>
+  <p class="small muted mt-2">Reservations open in our {html.escape(l['city'])} online store. Pay by card online or cash at the door. Drivers 21+, renters 25+.</p>
 </div>"""
+
+def location_pills(scroll="#rates", hero=False):
+    pills = "".join(f'<a class="pill" href="/{l["slug"]}" data-loc="{l["slug"]}" data-scroll="{scroll}">{html.escape(l["short"])}<small>{l["state"]}</small></a>' for l in LOCATIONS)
+    return f'<div class="pills{" pills--hero" if hero else ""}">{pills}</div>'
+
+def all_panels():
+    return "".join(location_panel(l, active=(i == 0)) for i, l in enumerate(LOCATIONS))
+
+def rates_section(title="Pick your beach. Rates and fleet update below.", eyebrow="Fleet &amp; rates by location", sand=True):
+    return f"""
+<section class="section{' section--sand2' if sand else ''}" id="rates">
+  <div class="container">
+    <div class="section-head reveal">
+      <div class="eyebrow">{eyebrow}</div>
+      <h2>{title}</h2>
+      <p>Each town runs its own fleet, so pricing and availability differ a little. Choose yours and the reserve buttons take you straight to that location's checkout.</p>
+    </div>
+    <div class="reveal" data-delay="1">{location_pills()}</div>
+    <div class="mt-6">{all_panels()}</div>
+  </div>
+</section>"""
 
 def reviews_block(heading="Riders love it. So does Google."):
     cards = "".join(
@@ -286,23 +430,19 @@ def reviews_block(heading="Riders love it. So does Google."):
 def locations_grid():
     cards = []
     for i, l in enumerate(LOCATIONS):
-        links = [f'<a href="tel:{l["tel"]}">{l["phone"]}</a>']
-        if l["site"]:
-            links.append(f'<a href="{l["site"]}" target="_blank" rel="noopener">Local site</a>')
-        else:
-            links.append('<a href="/rentals#reserve">Reserve</a>')
+        links = [f'<a href="/{l["slug"]}">Fleet &amp; rates</a>', f'<a href="tel:{l["tel"]}">{l["phone"]}</a>']
         cards.append(f"""<div class="loc{' loc--hq' if l.get('hq') else ''} reveal" data-delay="{(i % 4) + 1}">
   <div class="loc__state">{l['state']}</div>
   <h3>{html.escape(l['city'])}</h3>
-  <p>{html.escape(l['blurb'])}</p>
+  <p>{html.escape(l['blurb'])} Delivering to {html.escape(", ".join(l['areas']))}.</p>
   <div class="loc__links">{' '.join(links)}</div>
 </div>""")
     return '<div class="locations">' + "\n".join(cards) + "</div>"
 
-def cta_band():
+def cta_band(l=None):
+    l = l or LOC["delray-beach"]
     return f"""
 <section class="section section--blue cta-band">
-  <img class="wheel-bg" src="/assets/logo/wheel-white.svg" alt="" aria-hidden="true">
   <div class="container">
     <div class="reveal">
       <div class="eyebrow">Ready to ride?</div>
@@ -310,11 +450,11 @@ def cta_band():
       <p>Reserve online in two minutes, or call and we will set it up for you. Free delivery, cash or card at the door.</p>
     </div>
     <div class="reveal" data-delay="1">
-      <a class="cta-band__phone" href="tel:{BIZ['phone_tel']}">{BIZ['phone_display']}</a>
-      <p class="small">Call or text, 7 days a week</p>
+      <a class="cta-band__phone" href="tel:{l['tel']}">{l['phone']}</a>
+      <p class="small">{html.escape(l['city'])} · call or text, 7 days a week</p>
       <div class="btn-row mt-2">
-        <a class="btn btn--light" href="{BIZ['book_cart']}" target="_blank" rel="noopener">Reserve a golf cart</a>
-        <a class="btn btn--outline-light" href="{BIZ['book_moke']}" target="_blank" rel="noopener">Reserve a Moke</a>
+        <a class="btn btn--light" href="{l['cart']['url']}" target="_blank" rel="noopener">Reserve a golf cart</a>
+        {f'<a class="btn btn--outline-light" href="{l["moke"]["url"]}" target="_blank" rel="noopener">Reserve a Moke</a>' if l.get('moke') else '<a class="btn btn--outline-light" href="/locations">Other locations</a>'}
       </div>
     </div>
   </div>
@@ -348,19 +488,19 @@ def page_home():
     body = f"""
 <section class="hero">
   <div class="hero__media">
-    <video autoplay muted loop playsinline preload="metadata" poster="/assets/video/hero-poster.jpg" data-gif="/assets/video/hero.gif" aria-label="Joy Ride golf carts and Mokes cruising Delray Beach">
+    <video autoplay muted loop playsinline preload="metadata" poster="/assets/video/hero-poster.jpg" data-gif="/assets/video/hero.gif" aria-label="Joy Ride golf carts and Mokes cruising the beach">
       <source src="/assets/video/hero.webm" type="video/webm">
       <source src="/assets/video/hero.mp4" type="video/mp4">
-      <img src="/assets/video/hero.gif" alt="Joy Ride golf carts and Mokes cruising Delray Beach">
+      <img src="/assets/video/hero.gif" alt="Joy Ride golf carts and Mokes cruising the beach">
     </video>
   </div>
   <div class="container hero__content">
-    <div class="eyebrow hero__eyebrow reveal">Delray Beach · Est. 2022</div>
+    <div class="eyebrow hero__eyebrow reveal">Golf cart &amp; Moke rentals · Est. 2022</div>
     <h1 class="split">Live like a local. Take a Joy Ride.</h1>
-    <p class="hero__sub reveal" data-delay="2">Street-legal six-seat golf carts and open-top electric Mokes, delivered free to your door in Delray Beach and seven more beach towns.</p>
-    <div class="btn-row reveal" data-delay="3">
-      <a class="btn btn--primary" href="{BIZ['book_cart']}" target="_blank" rel="noopener">Rent a golf cart {ICON_ARROW}</a>
-      <a class="btn btn--outline-light" href="{BIZ['book_moke']}" target="_blank" rel="noopener">Rent a Moke {ICON_ARROW}</a>
+    <p class="hero__sub reveal" data-delay="2">Street-legal six-seat golf carts and open-top electric Mokes, delivered free to your door in eight beach towns from Florida to Montauk.</p>
+    <div class="hero__pick reveal" data-delay="3">
+      <div class="eyebrow hero__eyebrow">Where are you riding?</div>
+      {location_pills(scroll="#rates", hero=True)}
     </div>
     <div class="hero__bottom reveal" data-delay="4">
       <a class="gbadge" href="{BIZ['google_reviews']}" target="_blank" rel="noopener">{ICON_G}<span><strong>{BIZ['rating']}</strong> <span class="stars">{stars()}</span> · {BIZ['review_count']} Google reviews</span></a>
@@ -376,31 +516,31 @@ def page_home():
     <div class="section-head reveal">
       <div class="eyebrow">The fleet</div>
       <h2>Two ways to ride.</h2>
-      <p>Every vehicle is all-electric, street legal and fitted with seat belts, headlights, turn signals and a backup camera. Top speed 25 mph, range of 25 to 35 miles.</p>
+      <p>Every vehicle is all-electric, street legal and fitted with seat belts, headlights, turn signals and a backup camera. Top speed 25 mph.</p>
     </div>
     <div class="fleet">
       <article class="ride reveal" data-delay="1">
-        <div class="ride__media"><img src="/assets/img/cart-beach-1600.webp" srcset="/assets/img/cart-beach-900.webp 900w, /assets/img/cart-beach-1600.webp 1600w" sizes="(max-width: 760px) 100vw, 50vw" alt="White six-seat ICON golf cart on the beach in Delray Beach" loading="lazy"></div>
-        <span class="ride__tag">Most popular</span>
+        <div class="ride__media"><img src="/assets/img/cart-beach-1600.webp" srcset="/assets/img/cart-beach-900.webp 900w, /assets/img/cart-beach-1600.webp 1600w" sizes="(max-width: 760px) 100vw, 50vw" alt="White six-seat ICON golf cart on the beach" loading="lazy"></div>
+        <span class="ride__tag">Every location</span>
         <div class="ride__body">
           <div class="ride__title"><h3>Six-Seat Golf Cart</h3><div class="ride__price">$250<small>from / day</small></div></div>
-          <p>Our signature lifted ICON six-seater. Room for the whole crew, Bluetooth speakers, and a roof for the midday sun.</p>
+          <p>Our signature lifted six-seater. Room for the whole crew, Bluetooth speakers, and a roof for the midday sun.</p>
           <ul class="ride__specs"><li>Seats 6</li><li>25 mph street legal</li><li>Seat belts &amp; lights</li><li>Backup camera</li></ul>
           <div class="ride__actions">
-            <a class="btn btn--primary" href="{BIZ['book_cart']}" target="_blank" rel="noopener">Reserve</a>
+            <a class="btn btn--primary pill-link" href="#rates">Rates by location</a>
             <a class="btn btn--ghost" href="/rentals#golf-cart">Details</a>
           </div>
         </div>
       </article>
       <article class="ride reveal" data-delay="2">
         <div class="ride__media"><img src="/assets/img/moke-parked-1600.webp" srcset="/assets/img/moke-parked-900.webp 900w, /assets/img/moke-parked-1600.webp 1600w" sizes="(max-width: 760px) 100vw, 50vw" alt="Red electric Moke parked under palm trees" loading="lazy"></div>
-        <span class="ride__tag ride__tag--red">Turns heads</span>
+        <span class="ride__tag ride__tag--red">Florida &amp; Montauk</span>
         <div class="ride__body">
-          <div class="ride__title"><h3>Electric Moke</h3><div class="ride__price">$300<small>from / day</small></div></div>
-          <p>The open-top beach classic, reborn electric. Bright colors, four seats and pure vacation energy along A1A.</p>
+          <div class="ride__title"><h3>Electric Moke</h3><div class="ride__price">$250<small>from / day</small></div></div>
+          <p>The open-top beach classic, reborn electric. Bright colors, four seats and pure vacation energy along the coast.</p>
           <ul class="ride__specs"><li>Seats 4</li><li>25 mph street legal</li><li>Seat belts &amp; lights</li><li>All electric</li></ul>
           <div class="ride__actions">
-            <a class="btn btn--red" href="{BIZ['book_moke']}" target="_blank" rel="noopener">Reserve</a>
+            <a class="btn btn--red" href="#rates">Rates by location</a>
             <a class="btn btn--ghost" href="/rentals#moke">Details</a>
           </div>
         </div>
@@ -409,16 +549,7 @@ def page_home():
   </div>
 </section>
 
-<section class="section section--sand2" id="rates">
-  <div class="container">
-    <div class="section-head reveal">
-      <div class="eyebrow">Daily rates</div>
-      <h2>The longer you ride, the less you pay.</h2>
-      <p>Simple per-day pricing that drops every day you keep the cart. No hidden fees, and delivery is always free.</p>
-    </div>
-    {rates_block()}
-  </div>
-</section>
+{rates_section()}
 
 <section class="section" id="how">
   <div class="container">
@@ -427,9 +558,9 @@ def page_home():
       <h2>Booked to beach in four easy steps.</h2>
     </div>
     <div class="steps">
-      <div class="step reveal" data-delay="1"><h3>Reserve</h3><p>Pick your dates online or call us. Drivers must be 21+, renters 25+.</p></div>
+      <div class="step reveal" data-delay="1"><h3>Reserve</h3><p>Pick your town and dates online, or call the local number. Drivers must be 21+, renters 25+.</p></div>
       <div class="step reveal" data-delay="2"><h3>We deliver</h3><p>Your cart arrives fully charged at your home, hotel or rental, free of charge.</p></div>
-      <div class="step reveal" data-delay="3"><h3>Ride</h3><p>Cruise the beach, Atlantic Avenue and everywhere in between like a local.</p></div>
+      <div class="step reveal" data-delay="3"><h3>Ride</h3><p>Cruise the beach, the avenue and everywhere in between like a local.</p></div>
       <div class="step reveal" data-delay="4"><h3>We pick up</h3><p>Leave it where we dropped it. Your $250 deposit is refunded on return.</p></div>
     </div>
   </div>
@@ -439,7 +570,7 @@ def page_home():
   <div class="container">
     <div class="section-head reveal">
       <div class="eyebrow">Out and about</div>
-      <h2>Delray, seen from a Joy Ride.</h2>
+      <h2>The coast, seen from a Joy Ride.</h2>
     </div>
     <div class="gallery reveal">
       <figure><img src="/assets/img/fleet-beach-1600.webp" srcset="/assets/img/fleet-beach-900.webp 900w, /assets/img/fleet-beach-1600.webp 1600w" sizes="(max-width: 760px) 100vw, 60vw" alt="A Joy Ride golf cart and red Moke side by side at the beach" loading="lazy"><figcaption>Golf cart &amp; Moke</figcaption></figure>
@@ -456,7 +587,7 @@ def page_home():
     <div class="section-head reveal">
       <div class="eyebrow">Locations</div>
       <h2>Eight beach towns. One Joy Ride.</h2>
-      <p>We started in Delray Beach and now deliver up and down the coast. Same carts, same free delivery, same easy booking.</p>
+      <p>We started in Delray Beach and now deliver up and down the coast. Same carts, same free delivery, one easy booking.</p>
     </div>
     {locations_grid()}
     <p class="mt-4 reveal"><a class="link" href="/locations">All locations &amp; delivery areas {ICON_ARROW}</a></p>
@@ -466,7 +597,7 @@ def page_home():
 <section class="section section--sand2">
   <div class="container">
     <div class="trio">
-      <div class="trio__item reveal" data-delay="1">{ICON_TRUCK}<h3>Free delivery</h3><p>Door-to-door drop-off and pick-up anywhere in our delivery area. No trailer, no hassle.</p></div>
+      <div class="trio__item reveal" data-delay="1">{ICON_TRUCK}<h3>Free delivery</h3><p>Door-to-door drop-off and pick-up anywhere in each town's delivery area. No trailer, no hassle.</p></div>
       <div class="trio__item reveal" data-delay="2">{ICON_SHIELD}<h3>Safe &amp; street legal</h3><p>Seat belts, headlights, hazards and turn signals on every vehicle. Fully insured and registered.</p></div>
       <div class="trio__item reveal" data-delay="3">{ICON_CARD}<h3>Easy payment</h3><p>All major credit cards online, or cash on delivery. Refundable $250 deposit at the door.</p></div>
     </div>
@@ -480,7 +611,7 @@ def page_home():
       <div class="reveal" data-delay="1">
         <div class="eyebrow">Events &amp; sales</div>
         <h2>Weddings, shuttles, and carts to keep.</h2>
-        <p class="lead">Planning a wedding, corporate outing or block party? We supply fleets of carts and drivers anywhere in Florida. Fell in love with your rental? We sell new and used Gorilla carts and service what we sell.</p>
+        <p class="lead">Planning a wedding, corporate outing or block party? We supply fleets of carts and drivers. Fell in love with your rental? We sell new and used Gorilla carts and service what we sell.</p>
         <div class="btn-row mt-2">
           <a class="btn btn--primary" href="/events">Event bookings</a>
           <a class="btn btn--ghost" href="/sales">Golf cart sales</a>
@@ -499,22 +630,22 @@ def page_home():
     <div class="faq reveal">
       <details><summary>Who can drive the cart?<i></i></summary><div class="faq__body"><p>Drivers must be 21 or older with a valid driver's license. The person renting must be 25 or older.</p></div></details>
       <details><summary>Is there a deposit?<i></i></summary><div class="faq__body"><p>Yes. We collect a $250 security deposit at delivery and refund it when the vehicle is returned in the same condition it arrived.</p></div></details>
-      <details><summary>Where can I drive?<i></i></summary><div class="faq__body"><p>Our vehicles are registered low-speed vehicles, legal on roads with a posted limit of 35 mph or less. That covers most of Delray Beach and the beach communities we serve. See our <a href="/golf-cart-map">golf cart map</a> for local tips.</p></div></details>
+      <details><summary>Why do rates differ by town?<i></i></summary><div class="faq__body"><p>Each location runs its own fleet with its own costs, so a few towns price a little differently. Pick your location above and you will always see the right numbers, and the reserve button opens that town's checkout.</p></div></details>
+      <details><summary>Where can I drive?<i></i></summary><div class="faq__body"><p>Our vehicles are registered low-speed vehicles, legal on roads with a posted limit of 35 mph or less. That covers most of the beach communities we serve. See our <a href="/golf-cart-map">Delray Beach golf cart map</a> for local tips.</p></div></details>
       <details><summary>What is your cancellation policy?<i></i></summary><div class="faq__body"><p>Cancel free of charge up to seven days after booking. Cancellations seven or more days after the booking date incur a 3% processing charge. Full details in our <a href="/refund-policy">refund policy</a>.</p></div></details>
       <details><summary>How do I pay?<i></i></summary><div class="faq__body"><p>All major credit cards are accepted online, or you can pay cash when we deliver.</p></div></details>
-      <details><summary>How far can I go on a charge?<i></i></summary><div class="faq__body"><p>Roughly 25 to 35 miles on a full charge, which is plenty for a day around town. Plug it into any standard outlet overnight and it is ready to go again.</p></div></details>
     </div>
   </div>
 </section>
 
 {cta_band()}
 """
-    return layout(title="Joy Ride | Golf Cart & Moke Rentals in Delray Beach, FL",
-                  description="Street-legal six-seat golf cart and electric Moke rentals in Delray Beach, Boca Raton, Boynton Beach and beyond. Free door-to-door delivery. 5-star rated on Google. Reserve online or call (561) 569-2438.",
-                  path="/", body=body, over_hero=True)
+    return layout(title="Joy Ride | Golf Cart & Moke Rentals in Delray Beach, Palm Beach, Jacksonville, Charleston, Montauk & More",
+                  description="Street-legal six-seat golf cart and electric Moke rentals delivered free to your door in Delray Beach, Palm Beach, Pompano, Vero Beach, Jacksonville, Rehoboth, Charleston and Montauk. 5-star rated on Google. Reserve online.",
+                  path="/", body=body, over_hero=True, inplace=True)
 
 def page_rentals():
-    body = page_hero("Rentals", "Golf carts &amp; Mokes, delivered.", "Choose your ride, pick your dates, and we bring it to your door fully charged. Reserve online or call and we will handle it for you.",
+    body = page_hero("Rentals", "Golf carts &amp; Mokes, delivered.", "Choose your ride and your town. We bring it to your door fully charged, and the reserve buttons open that location's checkout.",
                      image="/assets/img/fleet-beach-1600.webp", alt="Joy Ride golf cart and Moke at the beach")
     body += f"""
 <section class="section" id="golf-cart">
@@ -524,9 +655,9 @@ def page_rentals():
       <div class="reveal" data-delay="1">
         <div class="eyebrow">Six-seat golf cart</div>
         <h2>The signature Joy Ride.</h2>
-        <p class="lead">Our lifted ICON six-seater is the cart you see all over Delray. Street legal with every safety feature built in, plus Bluetooth speakers, a backup camera and a roof for the sun. Top speed 25 mph, range 25 to 35 miles.</p>
+        <p class="lead">Our lifted six-seater is the cart you see all over the beach. Street legal with every safety feature built in, plus Bluetooth speakers, a backup camera and a roof for the sun. Top speed 25 mph, range 25 to 35 miles.</p>
         <ul class="ride__specs"><li>Seats 6</li><li>Seat belts</li><li>Headlights &amp; taillights</li><li>Hazards &amp; blinkers</li><li>Backup camera</li><li>Bluetooth audio</li></ul>
-        <div class="btn-row mt-4"><a class="btn btn--primary" href="{BIZ['book_cart']}" target="_blank" rel="noopener">Reserve a golf cart {ICON_ARROW}</a></div>
+        <div class="btn-row mt-4"><a class="btn btn--primary" href="#rates">Rates &amp; reserve {ICON_ARROW}</a></div>
       </div>
     </div>
   </div>
@@ -539,23 +670,19 @@ def page_rentals():
       <div class="reveal" data-delay="1">
         <div class="eyebrow">Electric Moke</div>
         <h2>The beach classic, gone electric.</h2>
-        <p class="lead">Compact, open-top and impossible to miss. The Moke seats four, tops out at 25 mph and is perfect for cruising the beachfront with the sea breeze in your hair.</p>
+        <p class="lead">Compact, open-top and impossible to miss. The Moke seats four, tops out at 25 mph and is perfect for cruising the beachfront with the sea breeze in your hair. Available in our Florida locations and Montauk.</p>
         <ul class="ride__specs"><li>Seats 4</li><li>Seat belts</li><li>Headlamps</li><li>Hazards &amp; blinkers</li><li>All electric</li><li>Bright colors</li></ul>
-        <div class="btn-row mt-4"><a class="btn btn--red" href="{BIZ['book_moke']}" target="_blank" rel="noopener">Reserve a Moke {ICON_ARROW}</a></div>
+        <div class="btn-row mt-4"><a class="btn btn--red" href="#rates">Rates &amp; reserve {ICON_ARROW}</a></div>
       </div>
     </div>
   </div>
 </section>
 
-<section class="section section--sand2" id="reserve">
+{rates_section()}
+
+<section class="section">
   <div class="container">
-    <div class="section-head reveal">
-      <div class="eyebrow">Daily rates</div>
-      <h2>Pick your dates. Watch the rate drop.</h2>
-      <p>Reserve online and pay securely by card, or call us and pay cash at the door.</p>
-    </div>
-    {rates_block()}
-    <div class="req mt-6">
+    <div class="req">
       <div class="req__item reveal" data-delay="1"><span>Driver age</span><b>21+</b></div>
       <div class="req__item reveal" data-delay="2"><span>Renter age</span><b>25+</b></div>
       <div class="req__item reveal" data-delay="3"><span>Deposit</span><b>$250 refundable</b></div>
@@ -566,12 +693,12 @@ def page_rentals():
 {reviews_block("Five stars, every time.")}
 {cta_band()}
 """
-    return layout(title="Golf Cart & Moke Rentals | Rates & Reservations | Joy Ride Delray Beach",
-                  description="Rent a street-legal six-seat golf cart from $140/day or an electric Moke from $140/day in Delray Beach. Free delivery, refundable deposit, reserve online.",
-                  path="/rentals", body=body, over_hero=True)
+    return layout(title="Golf Cart & Moke Rentals | Rates by Location | Joy Ride",
+                  description="Rent a street-legal six-seat golf cart or an electric Moke. Pick your beach town to see local rates and reserve online. Free delivery, refundable deposit.",
+                  path="/rentals", body=body, over_hero=True, inplace=True)
 
 def page_locations():
-    body = page_hero("Locations", "Eight beach towns, one Joy Ride.", "We started on Atlantic Avenue in Delray Beach and now deliver carts in beach towns from Florida to Long Island. Find your town below.")
+    body = page_hero("Locations", "Eight beach towns, one Joy Ride.", "We started on Atlantic Avenue in Delray Beach and now deliver carts in beach towns from Florida to Long Island. Pick your town for its fleet, rates and local number.")
     body += f"""
 <section class="section">
   <div class="container">
@@ -600,6 +727,57 @@ def page_locations():
     return layout(title="Locations | Golf Cart Rentals in Delray Beach, Palm Beach, Jacksonville, Charleston, Montauk & More | Joy Ride",
                   description="Joy Ride delivers golf carts and Mokes in Delray Beach, Palm Beach, Ft Lauderdale/Pompano, Vero Beach, Jacksonville, Dewey/Rehoboth Beach, Charleston and Montauk.",
                   path="/locations", body=body)
+
+def page_location(l):
+    others = "".join(f'<a href="/{o["slug"]}"><b>{html.escape(o["city"])}</b><span>{o["state"]}</span></a>' for o in LOCATIONS if o["slug"] != l["slug"])
+    fleet = "six-seat golf carts and electric Mokes" if l.get("moke") else "six-seat golf carts"
+    body = page_hero(f"{html.escape(l['city'])}, {l['state']}", f"Golf cart rentals in {html.escape(l['city'])}.",
+                     f"{html.escape(l['blurb'])} Street-legal {fleet}, delivered free to {html.escape(', '.join(l['areas']))}.",
+                     image="/assets/img/cart-beach-1600.webp", alt=f"Joy Ride golf cart in {l['city']}")
+    body += f"""
+<section class="section section--sand2" id="rates">
+  <div class="container">
+    <div class="section-head reveal">
+      <div class="eyebrow">{html.escape(l['city'])} fleet &amp; rates</div>
+      <h2>What's on the lot, and what it costs.</h2>
+    </div>
+    {location_panel(l, active=True)}
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="split-feature">
+      <div class="reveal">
+        <div class="eyebrow">Local team</div>
+        <h2>Call or text {html.escape(l['short'])} directly.</h2>
+        <p class="lead">A real person who knows the town, the roads and where the best parking is. Same-day questions welcome.</p>
+        <ul class="contact-list mt-4">
+          <li>{ICON_PHONE}<div><span>Call or text</span><a href="tel:{l['tel']}">{l['phone']}</a></div></li>
+          <li>{ICON_MAIL}<div><span>Email</span><a href="mailto:{BIZ['email']}?subject={html.escape(l['city'])}%20rental">{BIZ['email']}</a></div></li>
+        </ul>
+        {f'<p class="small muted mt-4">Local site: <a href="{l["site"]}" target="_blank" rel="noopener" style="color:var(--blue);text-decoration:underline">{l["site"].replace("https://", "")}</a></p>' if l.get("site") else ""}
+      </div>
+      <div class="map-embed reveal" data-delay="1"><iframe title="Map of {html.escape(l['map'])}" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="https://www.google.com/maps?q={html.escape(l['map']).replace(' ', '+')}&z=13&output=embed"></iframe></div>
+    </div>
+  </div>
+</section>
+
+<section class="section section--white">
+  <div class="container">
+    <div class="section-head reveal">
+      <div class="eyebrow">Other locations</div>
+      <h2>Riding somewhere else?</h2>
+    </div>
+    <div class="locs-compact reveal">{others}</div>
+  </div>
+</section>
+{reviews_block()}
+{cta_band(l)}
+"""
+    return layout(title=f"Golf Cart & Moke Rentals in {l['city']}, {l['state']} | Joy Ride",
+                  description=f"Joy Ride {l['city']}: street-legal six-seat golf cart{' and electric Moke' if l.get('moke') else ''} rentals from ${l['cart']['rates'][0]}/day with free delivery to {', '.join(l['areas'])}. Call {l['phone']} or reserve online.",
+                  path=f"/{l['slug']}", body=body, over_hero=True, location=l["slug"])
 
 def page_events():
     body = page_hero("Event bookings", "Carts for the big day.", "Weddings, corporate outings, festivals and shuttles. With locations around Florida we can cater your event wherever and whenever you need it.",
@@ -666,6 +844,8 @@ def page_contact():
         <li>{ICON_PIN}<div><span>Headquarters</span><b>{BIZ['address']}</b></div></li>
         <li>{ICON_CLOCK}<div><span>Hours</span><b>7 days a week</b></div></li>
       </ul>
+      <h4 class="eyebrow mt-6" style="margin-bottom:10px">Local numbers</h4>
+      <table class="rate-table">{"".join(f'<tr><td><a href="/{l["slug"]}">{html.escape(l["city"])}, {l["state"]}</a></td><td style="font-family:var(--body);font-size:0.95rem"><a href="tel:{l["tel"]}">{l["phone"]}</a></td></tr>' for l in LOCATIONS)}</table>
       <div class="btn-row mt-4">
         <a class="btn btn--primary" href="/rentals#reserve">Reserve a ride {ICON_ARROW}</a>
         <a class="gbadge gbadge--dark" href="{BIZ['google_reviews']}" target="_blank" rel="noopener">{ICON_G}<span><strong>{BIZ['rating']}</strong> <span class="stars">{stars()}</span> on Google</span></a>
@@ -747,24 +927,25 @@ def page_terms():
     return layout(title="Terms of Service | Joy Ride", description="Terms of service for the Joy Ride website and rentals.", path="/terms-of-service", body=body)
 
 def page_brand():
-    body = page_hero("Brand", "Logo concepts.", "The original wordmark, traced into clean vector art, with three ways to finish it. Every file here is an SVG that scales to any size.")
+    body = page_hero("Brand", "Logo files.", "The JOY RIDE wordmark, traced from the original logo into clean vector paths so it scales to any size. This is the logo in use across the site.")
     body += """
 <section class="section">
   <div class="container">
     <div class="brand-grid">
-      <div class="brand-card reveal" data-delay="1"><img src="/assets/logo/joyride-classic.svg" alt="Classic logo"><h3>A. Classic, cleaned</h3><p>Same layout as today. The palm trees are redrawn as clean vector silhouettes with no watermark, and the wordmark is traced from the original so the letterforms are unchanged.</p></div>
-      <div class="brand-card reveal" data-delay="2"><img src="/assets/logo/joyride-wheel.svg" alt="Wheel logo"><h3>B. The wheel O</h3><p>The O in JOY becomes an off-road cart wheel: tire, rim and five spokes. It reads as “Joy Ride” instantly and works small, as a favicon or embroidered on a polo.</p></div>
-      <div class="brand-card reveal" data-delay="3"><img src="/assets/logo/joyride-crest.svg" alt="Crest logo"><h3>C. The crest</h3><p>Palms and a wheel on the horizon line, sitting above the wordmark. Used for the site header lockup and the favicon.</p></div>
+      <div class="brand-card reveal" data-delay="1"><img src="/assets/logo/joyride-wordmark.svg" alt="Joy Ride wordmark, blue"><h3>Wordmark</h3><p>Primary. Blue #004AAD on light backgrounds.</p></div>
+      <div class="brand-card brand-card--dark reveal" data-delay="2"><img src="/assets/logo/joyride-wordmark-white.svg" alt="Joy Ride wordmark, white"><h3>Reversed</h3><p>White on photos and blue.</p></div>
+      <div class="brand-card reveal" data-delay="3"><img src="/assets/logo/favicon.svg" alt="Favicon" style="max-width:96px;margin:auto"><h3>Favicon</h3><p>The J on a blue disc, for browser tabs and home screens.</p></div>
     </div>
-    <div class="brand-grid mt-4">
-      <div class="brand-card reveal"><img src="/assets/logo/joyride-lockup.svg" alt="Horizontal lockup"><h3>Horizontal lockup</h3><p>Header and footer version.</p></div>
-      <div class="brand-card brand-card--dark reveal" data-delay="1"><img src="/assets/logo/joyride-lockup-white.svg" alt="Horizontal lockup, white"><h3>Reversed</h3><p>For photos and blue backgrounds.</p></div>
-      <div class="brand-card reveal" data-delay="2"><img src="/assets/logo/joyride-mark.svg" alt="Mark" style="max-width:200px;margin:auto"><h3>Mark &amp; favicon</h3><p>Stands alone for social avatars and app icons.</p></div>
+    <div class="section-head mt-6 reveal"><div class="eyebrow">Explorations, not in use</div><h2>Earlier concepts.</h2><p>Kept in <code>assets/logo/concepts/</code> in case they are useful later.</p></div>
+    <div class="brand-grid">
+      <div class="brand-card reveal"><img src="/assets/logo/concepts/joyride-classic.svg" alt="Classic concept"><h3>Classic, cleaned</h3></div>
+      <div class="brand-card reveal" data-delay="1"><img src="/assets/logo/concepts/joyride-wheel.svg" alt="Wheel concept"><h3>Wheel O</h3></div>
+      <div class="brand-card reveal" data-delay="2"><img src="/assets/logo/concepts/joyride-crest.svg" alt="Crest concept"><h3>Crest</h3></div>
     </div>
   </div>
 </section>
 """
-    return layout(title="Brand | Joy Ride", description="Joy Ride logo concepts.", path="/brand", body=body, noindex=True)
+    return layout(title="Brand | Joy Ride", description="Joy Ride logo files.", path="/brand", body=body, noindex=True)
 
 def page_404():
     body = f"""
@@ -793,9 +974,11 @@ PAGES = {
     "brand.html": page_brand,
     "404.html": page_404,
 }
+for _l in LOCATIONS:
+    PAGES[_l["slug"] + ".html"] = (lambda l: (lambda: page_location(l)))(_l)
 
 def write_sitemap():
-    urls = ["/", "/rentals", "/locations", "/events", "/sales", "/contact", "/golf-cart-map", "/affiliate", "/refund-policy", "/terms-of-service"]
+    urls = ["/", "/rentals", "/locations"] + [f"/{l['slug']}" for l in LOCATIONS] + ["/events", "/sales", "/contact", "/golf-cart-map", "/affiliate", "/refund-policy", "/terms-of-service"]
     today = datetime.date.today().isoformat()
     xml = ['<?xml version="1.0" encoding="UTF-8"?>', '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">']
     for u in urls:

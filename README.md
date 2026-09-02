@@ -8,7 +8,8 @@ A fast, static redesign of the Joy Ride golf cart & Moke rental site. No framewo
 | --- | --- |
 | `index.html` | Home: autoplaying hero, fleet, rates, how it works, gallery, Google reviews, all eight locations, FAQ |
 | `rentals.html` | Golf cart & Moke details, rate tables, requirements, reserve buttons |
-| `locations.html` | All locations with phone numbers and links to the sister sites |
+| `locations.html` | All locations with phone numbers and delivery areas |
+| `delray-beach.html`, `palm-beach.html`, `pompano-beach.html`, `vero-beach.html`, `jacksonville.html`, `rehoboth-beach.html`, `charleston.html`, `montauk.html` | One page per location with its own fleet, rates, local number and booking links |
 | `events.html`, `sales.html`, `contact.html`, `golf-cart-map.html`, `affiliate.html` | Inner pages |
 | `refund-policy.html`, `terms-of-service.html` | Policies carried over from the current site |
 | `brand.html` | Logo concepts (noindex) |
@@ -16,7 +17,13 @@ A fast, static redesign of the Joy Ride golf cart & Moke rental site. No framewo
 | `assets/video/` | Autoplay hero loop: `hero.mp4`, `hero.webm`, `hero.gif` fallback, `hero-poster.jpg` |
 | `tools/build.py` | Generates every page from one template so header/footer/meta stay in sync |
 
-Reservations still go through the existing Shopify product pages, so checkout, availability and payments are unchanged. Links are set in `tools/build.py` (`BIZ["book_cart"]`, `BIZ["book_moke"]`).
+## One site, eight locations
+
+The eight local Shopify stores stay as they are for checkout, but visitors only ever see this one site. A location switcher in the header (and pills on the home and rentals pages) picks the town; the fleet, rates, notes, phone number and reserve buttons update for that location, and the reserve buttons open that town's own Shopify product page. The choice is remembered in the browser.
+
+Each location also has its own static page (`/delray-beach`, `/jacksonville`, ...) so Google can index "golf cart rentals in <town>" separately.
+
+Everything per location lives in the `LOCATIONS` list at the top of `tools/build.py`: phone, delivery areas, cart/Moke/hourly/weekly product URLs and per-day rate tiers, add-ons and notes. Vero Beach and Dewey/Rehoboth have no store of their own and book through the Delray store. Palm Beach and Pompano only publish a one-day Moke price, so their Moke tables say "call for multi-day rates" until those tiers are added.
 
 ## Editing content
 
@@ -56,17 +63,15 @@ ffmpeg -i source.mp4 -ss 2 -frames:v 1 assets/video/hero-poster.jpg
 
 ## Logo
 
-The wordmark was traced from the original logo into vector paths, so the letterforms are identical to today. The palm trees were redrawn as clean silhouettes (the originals carried a Canva watermark).
+The site uses the JOY RIDE wordmark only. It was traced from the original logo into vector paths, so the letterforms are identical to today.
 
 | File | Use |
 | --- | --- |
-| `joyride-classic.svg` | Original layout, cleaned |
-| `joyride-wheel.svg` | The O in JOY replaced by a cart wheel |
-| `joyride-crest.svg` | Palms + wheel crest above the wordmark |
-| `joyride-lockup.svg` / `joyride-lockup-white.svg` | Horizontal header/footer lockup |
-| `joyride-mark.svg`, `favicon.svg`, `apple-touch-icon.png` | Mark, favicon, iOS icon |
+| `joyride-wordmark.svg` / `joyride-wordmark-white.svg` / `joyride-wordmark-ink.svg` | Header, footer, print |
+| `favicon.svg`, `apple-touch-icon.png` | The J on a blue disc |
+| `concepts/` | Earlier palm/wheel explorations, not in use |
 
-Preview all of them at `/brand`.
+Preview at `/brand`.
 
 ## Google reviews
 
