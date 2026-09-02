@@ -1,4 +1,4 @@
-# Joy Ride — joyridedelray.com redesign
+# Joy Ride: joyridedelray.com redesign
 
 A fast, static redesign of the Joy Ride golf cart & Moke rental site. No framework, no build tooling required to deploy: every page is plain HTML + one CSS file + one small JS file.
 
@@ -13,7 +13,7 @@ A fast, static redesign of the Joy Ride golf cart & Moke rental site. No framewo
 | `events.html`, `sales.html`, `contact.html`, `golf-cart-map.html`, `affiliate.html` | Inner pages |
 | `refund-policy.html`, `terms-of-service.html` | Policies carried over from the current site |
 | `brand.html` | Logo concepts (noindex) |
-| `assets/logo/` | New vector logo files (SVG) — see below |
+| `assets/logo/` | New vector logo files (SVG): see below |
 | `assets/video/` | Autoplay hero loop: `hero.mp4`, `hero.webm`, `hero.gif` fallback, `hero-poster.jpg` |
 | `tools/build.py` | Generates every page from one template so header/footer/meta stay in sync |
 
@@ -55,9 +55,9 @@ The hero uses a muted, inline `<video autoplay muted loop playsinline>` which au
 The current loop was built from the brand photos. To use the real Joy Ride film (YouTube `SMVaJwEa5kc`), export it and replace the files with the same names:
 
 ```bash
-ffmpeg -i source.mp4 -t 15 -an -vf "scale=1280:-2" -c:v libx264 -crf 24 -movflags +faststart assets/video/hero.mp4
-ffmpeg -i source.mp4 -t 15 -an -vf "scale=1280:-2" -c:v libvpx-vp9 -crf 34 -b:v 0 assets/video/hero.webm
-ffmpeg -i source.mp4 -t 12 -vf "fps=8,scale=400:-1,split[a][b];[a]palettegen=max_colors=96[p];[b][p]paletteuse" assets/video/hero.gif
+ffmpeg -i source.mp4 -t 15 -an -vf "scale=1920:-2" -c:v libx264 -crf 20 -movflags +faststart assets/video/hero.mp4
+ffmpeg -i source.mp4 -t 15 -an -vf "scale=1920:-2" -c:v libvpx-vp9 -crf 30 -b:v 0 assets/video/hero.webm
+ffmpeg -i source.mp4 -t 12 -vf "fps=8,scale=480:-1,split[a][b];[a]palettegen=max_colors=96[p];[b][p]paletteuse" assets/video/hero.gif
 ffmpeg -i source.mp4 -ss 2 -frames:v 1 assets/video/hero-poster.jpg
 ```
 

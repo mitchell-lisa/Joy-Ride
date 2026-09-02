@@ -39,7 +39,7 @@ BIZ = {
 
 STD_CART = [250, 190, 180, 170, 160, 150, 140]
 STD_MOKE = [300, 200, 190, 170, 160, 150, 140]
-TIER_LABELS = ["1 day", "2 days", "3 days", "4–5 days", "6 days", "7 days", "8+ days"]
+TIER_LABELS = ["1 day", "2 days", "3 days", "4 to 5 days", "6 days", "7 days", "8+ days"]
 DELRAY_STORE = "https://www.joyridedelray.com"
 
 # One entry per location. Each town that runs its own Shopify store books there;
@@ -464,7 +464,7 @@ def page_hero(eyebrow, title, lead, image=None, alt=""):
     if image:
         return f"""
 <section class="page-hero page-hero--image">
-  <div class="page-hero__media"><img src="{image}" alt="{html.escape(alt)}" fetchpriority="high"></div>
+  <div class="page-hero__media"><img src="{image}" srcset="{image.replace("-2048.webp", "-1400.webp")} 1400w, {image} 2048w" sizes="100vw" alt="{html.escape(alt)}" fetchpriority="high"></div>
   <div class="container">
     <div class="eyebrow reveal">{eyebrow}</div>
     <h1 class="split">{title}</h1>
@@ -520,7 +520,7 @@ def page_home():
     </div>
     <div class="fleet">
       <article class="ride reveal" data-delay="1">
-        <div class="ride__media"><img src="/assets/img/cart-beach-1600.webp" srcset="/assets/img/cart-beach-900.webp 900w, /assets/img/cart-beach-1600.webp 1600w" sizes="(max-width: 760px) 100vw, 50vw" alt="White six-seat ICON golf cart on the beach" loading="lazy"></div>
+        <div class="ride__media"><img src="/assets/img/cart-beach-2048.webp" srcset="/assets/img/cart-beach-900.webp 900w, /assets/img/cart-beach-1400.webp 1400w, /assets/img/cart-beach-2048.webp 2048w" sizes="(max-width: 760px) 100vw, 50vw" alt="White six-seat ICON golf cart on the beach" loading="lazy"></div>
         <span class="ride__tag">Every location</span>
         <div class="ride__body">
           <div class="ride__title"><h3>Six-Seat Golf Cart</h3><div class="ride__price">$250<small>from / day</small></div></div>
@@ -533,7 +533,7 @@ def page_home():
         </div>
       </article>
       <article class="ride reveal" data-delay="2">
-        <div class="ride__media"><img src="/assets/img/moke-parked-1600.webp" srcset="/assets/img/moke-parked-900.webp 900w, /assets/img/moke-parked-1600.webp 1600w" sizes="(max-width: 760px) 100vw, 50vw" alt="Red electric Moke parked under palm trees" loading="lazy"></div>
+        <div class="ride__media"><img src="/assets/img/moke-parked-2048.webp" srcset="/assets/img/moke-parked-900.webp 900w, /assets/img/moke-parked-1400.webp 1400w, /assets/img/moke-parked-2048.webp 2048w" sizes="(max-width: 760px) 100vw, 50vw" alt="Red electric Moke parked under palm trees" loading="lazy"></div>
         <span class="ride__tag ride__tag--red">Florida &amp; Montauk</span>
         <div class="ride__body">
           <div class="ride__title"><h3>Electric Moke</h3><div class="ride__price">$250<small>from / day</small></div></div>
@@ -573,8 +573,8 @@ def page_home():
       <h2>The coast, seen from a Joy Ride.</h2>
     </div>
     <div class="gallery reveal">
-      <figure><img src="/assets/img/fleet-beach-1600.webp" srcset="/assets/img/fleet-beach-900.webp 900w, /assets/img/fleet-beach-1600.webp 1600w" sizes="(max-width: 760px) 100vw, 60vw" alt="A Joy Ride golf cart and red Moke side by side at the beach" loading="lazy"><figcaption>Golf cart &amp; Moke</figcaption></figure>
-      <figure><img src="/assets/img/ride-atlantic-900.webp" alt="Golf cart and Moke driving through a Delray Beach intersection" loading="lazy"><figcaption>Atlantic Avenue</figcaption></figure>
+      <figure><img src="/assets/img/fleet-beach-2048.webp" srcset="/assets/img/fleet-beach-900.webp 900w, /assets/img/fleet-beach-1400.webp 1400w, /assets/img/fleet-beach-2048.webp 2048w" sizes="(max-width: 760px) 100vw, 60vw" alt="A Joy Ride golf cart and red Moke side by side at the beach" loading="lazy"><figcaption>Golf cart &amp; Moke</figcaption></figure>
+      <figure><img src="/assets/img/ride-atlantic-1400.webp" srcset="/assets/img/ride-atlantic-900.webp 900w, /assets/img/ride-atlantic-1400.webp 1400w" sizes="(max-width: 760px) 50vw, 25vw" alt="Golf cart and Moke driving through a Delray Beach intersection" loading="lazy"><figcaption>Atlantic Avenue</figcaption></figure>
       <figure><img src="/assets/img/video-still-900.webp" alt="Still from the Joy Ride video" loading="lazy"><a class="play" href="https://youtu.be/{BIZ['youtube_id']}" data-video="{BIZ['youtube_id']}" aria-label="Play the Joy Ride video"><span>{ICON_PLAY}</span></a><figcaption>Watch the video</figcaption></figure>
     </div>
   </div>
@@ -607,7 +607,7 @@ def page_home():
 <section class="section">
   <div class="container">
     <div class="split-feature">
-      <div class="split-feature__media reveal"><img src="/assets/img/ride-atlantic-1600.webp" srcset="/assets/img/ride-atlantic-900.webp 900w, /assets/img/ride-atlantic-1600.webp 1600w" sizes="(max-width: 860px) 100vw, 50vw" alt="Guests riding a golf cart and Moke through Delray Beach" loading="lazy"></div>
+      <div class="split-feature__media reveal"><img src="/assets/img/ride-atlantic-2048.webp" srcset="/assets/img/ride-atlantic-900.webp 900w, /assets/img/ride-atlantic-1400.webp 1400w, /assets/img/ride-atlantic-2048.webp 2048w" sizes="(max-width: 860px) 100vw, 50vw" alt="Guests riding a golf cart and Moke through Delray Beach" loading="lazy"></div>
       <div class="reveal" data-delay="1">
         <div class="eyebrow">Events &amp; sales</div>
         <h2>Weddings, shuttles, and carts to keep.</h2>
@@ -646,12 +646,12 @@ def page_home():
 
 def page_rentals():
     body = page_hero("Rentals", "Golf carts &amp; Mokes, delivered.", "Choose your ride and your town. We bring it to your door fully charged, and the reserve buttons open that location's checkout.",
-                     image="/assets/img/fleet-beach-1600.webp", alt="Joy Ride golf cart and Moke at the beach")
+                     image="/assets/img/fleet-beach-2048.webp", alt="Joy Ride golf cart and Moke at the beach")
     body += f"""
 <section class="section" id="golf-cart">
   <div class="container">
     <div class="split-feature">
-      <div class="split-feature__media reveal"><img src="/assets/img/cart-beach-1600.webp" alt="Six-seat ICON golf cart on the sand" loading="lazy"></div>
+      <div class="split-feature__media reveal"><img src="/assets/img/cart-beach-2048.webp" srcset="/assets/img/cart-beach-900.webp 900w, /assets/img/cart-beach-1400.webp 1400w, /assets/img/cart-beach-2048.webp 2048w" sizes="(max-width: 860px) 100vw, 50vw" alt="Six-seat ICON golf cart on the sand" loading="lazy"></div>
       <div class="reveal" data-delay="1">
         <div class="eyebrow">Six-seat golf cart</div>
         <h2>The signature Joy Ride.</h2>
@@ -666,7 +666,7 @@ def page_rentals():
 <section class="section section--white" id="moke">
   <div class="container">
     <div class="split-feature split-feature--flip">
-      <div class="split-feature__media reveal"><img src="/assets/img/moke-parked-1600.webp" alt="Red electric Moke" loading="lazy"></div>
+      <div class="split-feature__media reveal"><img src="/assets/img/moke-parked-2048.webp" srcset="/assets/img/moke-parked-900.webp 900w, /assets/img/moke-parked-1400.webp 1400w, /assets/img/moke-parked-2048.webp 2048w" sizes="(max-width: 860px) 100vw, 50vw" alt="Red electric Moke" loading="lazy"></div>
       <div class="reveal" data-delay="1">
         <div class="eyebrow">Electric Moke</div>
         <h2>The beach classic, gone electric.</h2>
@@ -733,7 +733,7 @@ def page_location(l):
     fleet = "six-seat golf carts and electric Mokes" if l.get("moke") else "six-seat golf carts"
     body = page_hero(f"{html.escape(l['city'])}, {l['state']}", f"Golf cart rentals in {html.escape(l['city'])}.",
                      f"{html.escape(l['blurb'])} Street-legal {fleet}, delivered free to {html.escape(', '.join(l['areas']))}.",
-                     image="/assets/img/cart-beach-1600.webp", alt=f"Joy Ride golf cart in {l['city']}")
+                     image="/assets/img/cart-beach-2048.webp", alt=f"Joy Ride golf cart in {l['city']}")
     body += f"""
 <section class="section section--sand2" id="rates">
   <div class="container">
@@ -781,7 +781,7 @@ def page_location(l):
 
 def page_events():
     body = page_hero("Event bookings", "Carts for the big day.", "Weddings, corporate outings, festivals and shuttles. With locations around Florida we can cater your event wherever and whenever you need it.",
-                     image="/assets/img/ride-atlantic-1600.webp", alt="Golf cart and Moke driving through Delray Beach")
+                     image="/assets/img/ride-atlantic-2048.webp", alt="Golf cart and Moke driving through Delray Beach")
     body += f"""
 <section class="section">
   <div class="container">
@@ -812,7 +812,7 @@ def page_sales():
 <section class="section">
   <div class="container">
     <div class="split-feature">
-      <div class="split-feature__media reveal"><img src="/assets/img/gorilla-cart-900.webp" alt="Gorilla street-legal golf cart" loading="lazy"></div>
+      <div class="split-feature__media reveal"><img src="/assets/img/cart-beach-2048.webp" srcset="/assets/img/cart-beach-900.webp 900w, /assets/img/cart-beach-1400.webp 1400w, /assets/img/cart-beach-2048.webp 2048w" sizes="(max-width: 860px) 100vw, 50vw" alt="Street-legal six-seat golf cart" loading="lazy"></div>
       <div class="reveal" data-delay="1">
         <div class="eyebrow">Gorilla carts</div>
         <h2>Bought from people who drive them every day.</h2>

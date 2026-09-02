@@ -1,4 +1,4 @@
-/* Joy Ride — site behaviour (no dependencies) */
+/* Joy Ride: site behaviour (no dependencies) */
 (function () {
   "use strict";
 
