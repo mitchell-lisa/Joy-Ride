@@ -14,8 +14,10 @@ A fast, static redesign of the Joy Ride golf cart & Moke rental site. No framewo
 | `refund-policy.html`, `terms-of-service.html` | Policies carried over from the current site |
 | `brand.html` | Logo concepts (noindex) |
 | `assets/logo/` | New vector logo files (SVG): see below |
-| `assets/video/` | Autoplay hero loop: `hero.mp4`, `hero.webm`, `hero.gif` fallback, `hero-poster.jpg` |
+| `assets/video/` | Autoplay hero loop: `hero.mp4` (720p, 10 s, about 1.4 MB) and `hero-poster.jpg` |
 | `tools/build.py` | Generates every page from one template so header/footer/meta stay in sync |
+| `tools/source-img/` | Full-size JPG originals. Not served; the `assets/img/*.webp` sizes are made from these |
+| `assets/fonts/` | Italiana and Jost, self-hosted as woff2. No Google Fonts request |
 
 ## One site, eight locations
 
@@ -50,16 +52,18 @@ To point `www.joyridedelray.com` at this site, keep the Shopify store running on
 
 ## Hero video
 
-The hero uses a muted, inline `<video autoplay muted loop playsinline>` which autoplays on iOS and Android exactly like a GIF but at a fraction of the file size. `hero.gif` is only used if a browser refuses to play the video.
-
-The current loop was built from the brand photos. To use the real Joy Ride film (YouTube `SMVaJwEa5kc`), export it and replace the files with the same names:
+The hero uses a muted, inline `<video autoplay muted loop playsinline>` with a JPG poster. If a browser refuses to autoplay, the poster shows and nothing else changes. To swap in the real Joy Ride film (YouTube `SMVaJwEa5kc`), export it and replace the two files with the same names:
 
 ```bash
-ffmpeg -i source.mp4 -t 15 -an -vf "scale=1920:-2" -c:v libx264 -crf 20 -movflags +faststart assets/video/hero.mp4
-ffmpeg -i source.mp4 -t 15 -an -vf "scale=1920:-2" -c:v libvpx-vp9 -crf 30 -b:v 0 assets/video/hero.webm
-ffmpeg -i source.mp4 -t 12 -vf "fps=8,scale=480:-1,split[a][b];[a]palettegen=max_colors=96[p];[b][p]paletteuse" assets/video/hero.gif
-ffmpeg -i source.mp4 -ss 2 -frames:v 1 assets/video/hero-poster.jpg
+ffmpeg -i source.mp4 -t 10 -an -vf "scale=1280:-2,fps=24" -c:v libx264 -preset slow -crf 27 -pix_fmt yuv420p -movflags +faststart assets/video/hero.mp4
+ffmpeg -i source.mp4 -ss 1 -frames:v 1 -vf "scale=1600:-2" -q:v 6 assets/video/hero-poster.jpg
 ```
+
+Keep the mp4 under about 1.5 MB. The whole home page should stay under 2.5 MB with every image loaded.
+
+## Facts the owner still has to confirm
+
+Anything not on joyridedelray.com or a Joy Ride product page today is either omitted or listed here. Before this replaces the live site, confirm: the founding year (removed from the site until confirmed), insurance wording (removed), hours of operation (nothing is shown), that Pompano, Vero Beach and Dewey/Rehoboth really use the Delray number, the multi-day Moke rates for Palm Beach and Pompano, the 25 mph top speed and 25 to 35 mile range, the 21 and 25 age minimums, the $250 deposit, and the current Google rating and review count.
 
 ## Logo
 
