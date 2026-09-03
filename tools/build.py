@@ -56,7 +56,7 @@ DELRAY_STORE = "https://www.joyridedelray.com"
 # rates: list of 7 per-day prices matching TIER_LABELS, or a single-item list
 # when only the one-day price is published (the table then says "call").
 LOCATIONS = [
-    {"slug": "delray-beach", "city": "Delray Beach", "short": "Delray", "state": "FL", "hq": True,
+    {"slug": "delray-beach", "shop": "joy-ride-1689.myshopify.com", "city": "Delray Beach", "short": "Delray", "state": "FL", "hq": True,
      "blurb": "Our home base on Atlantic Avenue, and the biggest fleet.",
      "areas": ["Delray Beach", "Boca Raton", "Boynton Beach", "Highland Beach", "Gulf Stream"],
      "phone": "(561) 569-2438", "tel": "+15615692438", "store": DELRAY_STORE, "site": None,
@@ -66,7 +66,7 @@ LOCATIONS = [
      "hourly": {"url": DELRAY_STORE + "/products/marriott-golf-cart-rental", "rates": [("2 hours", 125), ("4 hours", 150), ("6 hours", 200), ("8 hours", 250), ("10 hours", 300)]},
      "addons": [("Car seat add-on", 15, DELRAY_STORE + "/products/car-seat-add-on"), ("Damage waiver", 12, DELRAY_STORE + "/products/golf-cart-rental-liability-insurance")],
      "notes": []},
-    {"slug": "palm-beach", "city": "Palm Beach", "short": "Palm Beach", "state": "FL",
+    {"slug": "palm-beach", "shop": "ef890a-8a.myshopify.com", "city": "Palm Beach", "short": "Palm Beach", "state": "FL",
      "blurb": "Island cruising from Worth Avenue to the Lake Trail.",
      "areas": ["Palm Beach", "West Palm Beach"],
      "phone": "(561) 562-7152", "tel": "+15615627152", "store": "https://www.joyridepalmbeach.com", "site": "https://www.joyridepalmbeach.com",
@@ -76,7 +76,7 @@ LOCATIONS = [
      "moke": {"url": "https://www.joyridepalmbeach.com/products/moke-rental", "rates": [300]},
      "hourly": None, "addons": [("Damage waiver", 12, "https://www.joyridepalmbeach.com/products/golf-cart-rental-damage-waiver")],
      "notes": ["Ask about special event and university partnership pricing."]},
-    {"slug": "pompano-beach", "city": "Pompano & Ft Lauderdale", "short": "Pompano", "state": "FL",
+    {"slug": "pompano-beach", "shop": "16kswt-bw.myshopify.com", "city": "Pompano & Ft Lauderdale", "short": "Pompano", "state": "FL",
      "blurb": "Beach-to-boardwalk rides along the A1A corridor in Broward County.",
      "areas": ["Pompano Beach", "Fort Lauderdale", "Lauderdale-by-the-Sea", "Deerfield Beach"],
      "phone": "(561) 569-2438", "tel": "+15615692438", "store": "https://joyridepompanobeach.com", "site": "https://joyridepompanobeach.com",
@@ -86,7 +86,7 @@ LOCATIONS = [
      "moke": {"url": "https://joyridepompanobeach.com/products/electric-mini-moke", "rates": [250]},
      "hourly": None, "addons": [("Damage waiver", 12, "https://joyridepompanobeach.com/products/golf-cart-rental-damage-waiver")],
      "notes": ["Free delivery within our Broward delivery range. Outside it, call for a quote."]},
-    {"slug": "vero-beach", "city": "Vero Beach", "short": "Vero", "state": "FL",
+    {"slug": "vero-beach", "shop": "joy-ride-1689.myshopify.com", "city": "Vero Beach", "short": "Vero", "state": "FL",
      "blurb": "Ocean Drive, the beachside village and quiet Treasure Coast streets.",
      "areas": ["Vero Beach", "Indian River Shores"],
      "phone": "(561) 569-2438", "tel": "+15615692438", "store": DELRAY_STORE, "site": None,
@@ -95,7 +95,7 @@ LOCATIONS = [
      "moke": {"url": DELRAY_STORE + "/products/electric-mini-moke", "rates": STD_MOKE},
      "hourly": None, "addons": [("Damage waiver", 12, DELRAY_STORE + "/products/golf-cart-rental-liability-insurance")],
      "notes": ["Vero Beach rentals are booked through our Delray Beach store. Enter your Vero Beach delivery address at checkout, or call and we will set it up."]},
-    {"slug": "jacksonville", "city": "Jacksonville & St. Augustine", "short": "Jacksonville", "state": "FL",
+    {"slug": "jacksonville", "shop": "c296af-46.myshopify.com", "city": "Jacksonville & St. Augustine", "short": "Jacksonville", "state": "FL",
      "blurb": "Jax Beach, Ponte Vedra and St. Augustine with same-day delivery.",
      "areas": ["Jacksonville Beach", "Neptune Beach", "Atlantic Beach", "Ponte Vedra", "St. Augustine"],
      "phone": "(904) 834-9466", "tel": "+19048349466", "store": "https://joyridejacksonville.com", "site": "https://joyridejacksonville.com",
@@ -106,7 +106,7 @@ LOCATIONS = [
      "weekly": {"label": "St. Augustine weekly golf cart", "price": 1680, "url": "https://joyridejacksonville.com/products/golf-cart-rental-st-augustine"},
      "addons": [("Damage waiver", 12, "https://joyridejacksonville.com/products/golf-cart-rental-damage-waiver")],
      "notes": ["Three-day minimum on holiday weekends.", "Same-day delivery available across the Jax Beach area."]},
-    {"slug": "rehoboth-beach", "city": "Dewey & Rehoboth Beach", "short": "Rehoboth", "state": "DE",
+    {"slug": "rehoboth-beach", "shop": "joy-ride-1689.myshopify.com", "city": "Dewey & Rehoboth Beach", "short": "Rehoboth", "state": "DE",
      "blurb": "Summer on the Delaware shore, from the boardwalk to the bay.",
      "areas": ["Rehoboth Beach", "Dewey Beach"],
      "phone": "(561) 569-2438", "tel": "+15615692438", "store": DELRAY_STORE, "site": None,
@@ -115,7 +115,7 @@ LOCATIONS = [
      "moke": {"url": DELRAY_STORE + "/products/electric-mini-moke", "rates": STD_MOKE},
      "hourly": None, "addons": [("Damage waiver", 12, DELRAY_STORE + "/products/golf-cart-rental-liability-insurance")],
      "notes": ["Delaware rentals are booked through our Delray Beach store. Enter your Dewey or Rehoboth delivery address at checkout, or call and we will set it up."]},
-    {"slug": "charleston", "city": "Charleston", "short": "Charleston", "state": "SC",
+    {"slug": "charleston", "shop": "zpbfxf-2z.myshopify.com", "city": "Charleston", "short": "Charleston", "state": "SC",
      "blurb": "Downtown Charleston and the Isle of Palms in Lowcountry style.",
      "areas": ["Downtown Charleston", "Isle of Palms"],
      "phone": "(843) 905-2495", "tel": "+18439052495", "store": "https://joyridecharleston.com", "site": "https://joyridecharleston.com",
@@ -124,7 +124,7 @@ LOCATIONS = [
      "moke": None, "hourly": None,
      "addons": [("Damage waiver", 12, "https://joyridecharleston.com/products/golf-cart-rental-damage-waiver"), ("Isle of Palms delivery", 250, "https://joyridecharleston.com/products/delivery-isle-of-palms")],
      "notes": ["Free delivery in downtown Charleston. Isle of Palms delivery is $250 round trip."]},
-    {"slug": "montauk", "city": "Montauk", "short": "Montauk", "state": "NY",
+    {"slug": "montauk", "shop": "k43z9t-dq.myshopify.com", "city": "Montauk", "short": "Montauk", "state": "NY",
      "blurb": "The End of Long Island, from Ditch Plains to the harbor.",
      "areas": ["Montauk"],
      "phone": "(631) 430-6653", "tel": "+16314306653", "store": "https://joyridemontauk.com", "site": "https://joyridemontauk.com",
@@ -428,6 +428,33 @@ def location_pills(scroll="#rates", hero=False):
 def all_panels():
     return "".join(location_panel(l, active=(i == 0)) for i, l in enumerate(LOCATIONS))
 
+
+def locations_json():
+    import json
+    data = {l["slug"]: {"name": l["city"], "short": l["short"], "shop": l["shop"], "phone": l["phone"], "tel": l["tel"]} for l in LOCATIONS}
+    return f'<script type="application/json" id="joyride-locations">{json.dumps(data)}</script>'
+
+def availability_section(l=None, sand=False):
+    """Date search backed by the booking system: pick dates, see what is free, reserve."""
+    loc = l or LOC["delray-beach"]
+    return f"""
+<section class="section{' section--sand2' if sand else ''} avail" id="availability" data-loc="{loc['slug']}">
+  <div class="container">
+    <div class="section-head">
+      <h2>Check availability</h2>
+      <p>Pick your dates and see which vehicles are free in <span data-loc-name>{html.escape(loc['city'])}</span>. Prices update for the length of your rental.</p>
+    </div>
+    <form class="avail__form" novalidate>
+      <label class="avail__field"><span>Start day</span><input type="date" name="start" required></label>
+      <label class="avail__field"><span>End day</span><input type="date" name="end" required></label>
+      <button class="btn btn--primary avail__go" type="submit">Search</button>
+    </form>
+    <p class="avail__msg" aria-live="polite"></p>
+    <div class="avail__results" aria-live="polite"></div>
+  </div>
+  {locations_json()}
+</section>"""
+
 def rates_section(title="Rates by location", sand=True):
     return f"""
 <section class="section{' section--sand2' if sand else ''}" id="rates">
@@ -587,6 +614,7 @@ def page_home():
   </div>
 </section>
 
+{availability_section()}
 {rates_section()}
 
 <section class="section" id="how">
@@ -705,6 +733,7 @@ def page_rentals():
   </div>
 </section>
 
+{availability_section()}
 {rates_section()}
 
 <section class="section">
@@ -761,6 +790,7 @@ def page_location(l):
                      f"{html.escape(l['blurb'])} Street-legal {fleet}, delivered free to {html.escape(', '.join(l['areas']))}.",
                      image="/assets/img/cart-beach-2048.webp", alt=f"Joy Ride golf cart in {l['city']}")
     body += f"""
+{availability_section(l)}
 <section class="section section--sand2" id="rates">
   <div class="container">
     <div class="section-head">

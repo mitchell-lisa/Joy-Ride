@@ -19,7 +19,7 @@
 <link rel="apple-touch-icon" href="/assets/logo/apple-touch-icon.png">
 <link rel="preload" href="/assets/fonts/Italiana-Regular.woff2?v=c3849d18a7" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="/assets/fonts/Jost-400.woff2?v=3c986c6628" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="/assets/css/style.css?v=7432e29f1a">
+<link rel="stylesheet" href="/assets/css/style.css?v=d29c7601ba">
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Who can drive the cart?", "acceptedAnswer": {"@type": "Answer", "text": "Drivers must be 21 or older with a valid driver's license. The person renting must be 25 or older."}}, {"@type": "Question", "name": "Is there a deposit?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. We collect a $250 security deposit at delivery and refund it when the vehicle is returned in the same condition it arrived."}}, {"@type": "Question", "name": "Why do rates differ by town?", "acceptedAnswer": {"@type": "Answer", "text": "Each location runs its own fleet with its own costs, so a few towns price a little differently. Pick your location above to see that town's numbers, and the reserve button opens that town's checkout."}}, {"@type": "Question", "name": "Where can I drive?", "acceptedAnswer": {"@type": "Answer", "text": "Our vehicles are registered low-speed vehicles, legal on roads with a posted limit of 35 mph or less. That covers most of the beach communities we serve. See our Delray Beach golf cart map for local tips."}}, {"@type": "Question", "name": "What is your cancellation policy?", "acceptedAnswer": {"@type": "Answer", "text": "Cancel free of charge up to seven days after booking. Cancellations seven or more days after the booking date incur a 3% processing charge. Full details are in our refund policy."}}, {"@type": "Question", "name": "How do I pay?", "acceptedAnswer": {"@type": "Answer", "text": "All major credit cards are accepted online, or you can pay cash when we deliver."}}]}</script>
 <script type="application/ld+json">{
 "@context": "https://schema.org",
@@ -143,6 +143,23 @@
   </div>
 </section>
 
+
+<section class="section avail" id="availability" data-loc="delray-beach">
+  <div class="container">
+    <div class="section-head">
+      <h2>Check availability</h2>
+      <p>Pick your dates and see which vehicles are free in <span data-loc-name>Delray Beach</span>. Prices update for the length of your rental.</p>
+    </div>
+    <form class="avail__form" novalidate>
+      <label class="avail__field"><span>Start day</span><input type="date" name="start" required></label>
+      <label class="avail__field"><span>End day</span><input type="date" name="end" required></label>
+      <button class="btn btn--primary avail__go" type="submit">Search</button>
+    </form>
+    <p class="avail__msg" aria-live="polite"></p>
+    <div class="avail__results" aria-live="polite"></div>
+  </div>
+  <script type="application/json" id="joyride-locations">{"delray-beach": {"name": "Delray Beach", "short": "Delray", "shop": "joy-ride-1689.myshopify.com", "phone": "(561) 569-2438", "tel": "+15615692438"}, "palm-beach": {"name": "Palm Beach", "short": "Palm Beach", "shop": "ef890a-8a.myshopify.com", "phone": "(561) 562-7152", "tel": "+15615627152"}, "pompano-beach": {"name": "Pompano & Ft Lauderdale", "short": "Pompano", "shop": "16kswt-bw.myshopify.com", "phone": "(561) 569-2438", "tel": "+15615692438"}, "vero-beach": {"name": "Vero Beach", "short": "Vero", "shop": "joy-ride-1689.myshopify.com", "phone": "(561) 569-2438", "tel": "+15615692438"}, "jacksonville": {"name": "Jacksonville & St. Augustine", "short": "Jacksonville", "shop": "c296af-46.myshopify.com", "phone": "(904) 834-9466", "tel": "+19048349466"}, "rehoboth-beach": {"name": "Dewey & Rehoboth Beach", "short": "Rehoboth", "shop": "joy-ride-1689.myshopify.com", "phone": "(561) 569-2438", "tel": "+15615692438"}, "charleston": {"name": "Charleston", "short": "Charleston", "shop": "zpbfxf-2z.myshopify.com", "phone": "(843) 905-2495", "tel": "+18439052495"}, "montauk": {"name": "Montauk", "short": "Montauk", "shop": "k43z9t-dq.myshopify.com", "phone": "(631) 430-6653", "tel": "+16314306653"}}</script>
+</section>
 
 <section class="section section--sand2" id="rates">
   <div class="container">
@@ -672,6 +689,6 @@
   <button class="modal__close" aria-label="Close video">×</button>
   <div class="modal__box"><iframe title="Joy Ride Golf Cart Rentals video" src="" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe></div>
 </div>
-<script src="/assets/js/main.js?v=80e6bc937a" defer></script>
+<script src="/assets/js/main.js?v=efb6559b1e" defer></script>
 </body>
 </html>
