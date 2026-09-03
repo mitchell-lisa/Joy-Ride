@@ -533,7 +533,7 @@ def page_home():
     body = f"""
 <section class="hero">
   <div class="hero__media">
-    <video autoplay muted loop playsinline preload="metadata" poster="{asset("/assets/video/hero-poster.jpg")}" aria-label="Joy Ride golf carts and Mokes on the road in Delray Beach">
+    <video autoplay muted loop playsinline preload="metadata" poster="{asset("/assets/video/hero-poster.jpg")}" data-anim="{asset("/assets/video/hero.webp")}" aria-label="Joy Ride golf carts and Mokes on the road in Delray Beach">
       <source src="{asset("/assets/video/hero.mp4")}" type="video/mp4">
     </video>
   </div>

@@ -185,6 +185,7 @@ body.nav-open .burger span:nth-child(3) { top: 21px; transform: rotate(-45deg); 
 }
 .hero__media { position: absolute; inset: 0; }
 .hero__media video, .hero__media img { width: 100%; height: 100%; object-fit: cover; }
+.hero__media video::-webkit-media-controls, .hero__media video::-webkit-media-controls-start-playback-button { display: none !important; -webkit-appearance: none; }
 .hero__media::after {
   content: ""; position: absolute; inset: 0;
   background: linear-gradient(180deg, rgba(10,14,24,0.5) 0%, rgba(10,14,24,0.2) 40%, rgba(10,14,24,0.8) 100%);

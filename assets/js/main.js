@@ -37,8 +37,25 @@
     } else {
       video.muted = true;
       video.setAttribute("muted", "");
+      var swapped = false;
+      /* iOS Low Power Mode and some data-saver settings refuse video autoplay
+         outright. Animated images are exempt, so fall back to one. */
+      function swapToAnimated() {
+        if (swapped) return;
+        swapped = true;
+        var anim = video.getAttribute("data-anim");
+        if (!anim) return;
+        var img = document.createElement("img");
+        img.src = anim;
+        img.alt = video.getAttribute("aria-label") || "";
+        img.decoding = "async";
+        video.replaceWith(img);
+      }
       var p = video.play();
-      if (p && typeof p.catch === "function") { p.catch(function () {}); }
+      if (p && typeof p.catch === "function") { p.catch(swapToAnimated); }
+      /* Belt and braces: data is buffered, nothing is playing, and no error fired */
+      setTimeout(function () { if (video.isConnected && video.paused && !video.ended && video.readyState >= 2) swapToAnimated(); }, 4000);
+      video.addEventListener("error", swapToAnimated, true);
     }
   }
 
